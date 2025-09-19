@@ -3,10 +3,64 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ===========================
-         Favicon (icono de la pestaña)
+         SEO BÁSICO
+    ============================ -->
+    <meta name="description"
+        content="Catálogo de ramos de girasoles eternos, detalles únicos y regalos especiales para Amor y Amistad. 🌹💝">
+    <meta name="keywords" content="ramos, girasoles eternos, amor y amistad, regalos, detalles, flores, He-Zu">
+    <meta name="author" content="He - Zu Eternal">
+
+<!-- ===========================
+     OPEN GRAPH (Facebook / WhatsApp)
+============================ -->
+<meta property="og:site_name" content="He - Zu Eternal" />
+<meta property="og:locale" content="es_CO" />
+<meta property="og:title" content="🌹 HE - ZU ETERNAL 💝" />
+<meta property="og:description" content="Descubre los mejores ramos, girasoles eternos y detalles únicos para Amor y Amistad. 💐" />
+<meta property="og:image" content="https://brandon094.github.io/E-commerce-amor-y-amistad/img/logo.webp" />
+<meta property="og:image:alt" content="Logo de He - Zu Eternal" />
+<meta property="og:url" content="https://brandon094.github.io/E-commerce-amor-y-amistad/" />
+<meta property="og:type" content="website" />
+
+<!-- ===========================
+     TWITTER CARDS
+============================ -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="🌹 HE - ZU ETERNAL 💝" />
+<meta name="twitter:description" content="Regalos únicos y ramos personalizados para sorprender en Amor y Amistad." />
+<meta name="twitter:image" content="https://brandon094.github.io/E-commerce-amor-y-amistad/img/logo.webp" />
+<meta name="twitter:image:alt" content="Logo de He - Zu Eternal" />
+
+<!-- ===========================
+     RENDIMIENTO Y COMPATIBILIDAD
+============================ -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff6699">
+<link rel="canonical" href="https://brandon094.github.io/E-commerce-amor-y-amistad/">
+
+
+    <!-- ===========================
+         TWITTER CARDS
+    ============================ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@TuUsuarioTwitter" /> <!-- opcional -->
+    <meta name="twitter:title" content="🌹 HE - ZU ETERNAL 💝" />
+    <meta name="twitter:description"
+        content="Regalos únicos y ramos personalizados para sorprender en Amor y Amistad." />
+    <meta name="twitter:image" content="https://tusitio.com/img/logo.webp" />
+    <meta name="twitter:image:alt" content="Logo de He - Zu Eternal" />
+
+    <!-- ===========================
+         RENDIMIENTO Y COMPATIBILIDAD
+    ============================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff6699">
+    <link rel="canonical" href="https://tusitio.com">
+
+    <!-- ===========================
+         Favicon
     ============================ -->
     <link rel="icon" type="image/x-icon" href="img/logo.jpeg">
 
@@ -22,7 +76,6 @@
     <div class="container">
         <!-- ===========================
              HEADER
-             Incluye logo, título, subtítulo y contactos
         ============================ -->
         <div class="header">
             <!-- Logo -->
@@ -38,12 +91,10 @@
 
             <!-- Contactos con enlaces directos a WhatsApp -->
             <div class="contactos">
-                <!-- Contacto 1 -->
                 <a href="https://wa.me/573132199430" target="_blank" class="whatsapp-link">
                     <img src="img/whatsapp-icon.jpg" alt="WhatsApp" class="whatsapp-icon">
                     313 219 9430
                 </a>
-                <!-- Contacto 2 -->
                 <a href="https://wa.me/573209538728" target="_blank" class="whatsapp-link">
                     <img src="img/whatsapp-icon.jpg" alt="WhatsApp" class="whatsapp-icon">
                     320 953 8728
@@ -53,16 +104,12 @@
 
         <!-- ===========================
              SECCIÓN DE PRODUCTOS
-             Contiene loader y productos dinámicos
         ============================ -->
         <div id="todos" class="section active">
-            <!-- Loader (pantalla de carga mientras se descargan las imágenes) -->
             <div id="loader" class="loader">
                 <div class="spinner"></div>
                 <p>Cargando productos...</p>
             </div>
-
-            <!-- Contenedor de productos (se rellena dinámicamente con JS) -->
             <div id="products-container" class="products-grid" style="display:none;">
                 <!-- Los productos se cargarán aquí dinámicamente -->
             </div>
@@ -70,7 +117,6 @@
 
         <!-- ===========================
              FOOTER
-             Mensaje final
         ============================ -->
         <div class="footer">
             <p>❤️ Hechos con amor para personas especiales ❤️</p>
@@ -80,20 +126,12 @@
 
     <!-- ===========================
          MODAL DEL CARRUSEL
-         Aparece al hacer clic en la imagen de un producto
     ============================ -->
     <div id="modal-carrusel" class="modal">
-        <!-- Botón cerrar -->
         <span class="cerrar">&times;</span>
-
         <div class="modal-content">
-            <!-- Botón imagen anterior -->
             <button class="prev">&#10094;</button>
-
-            <!-- Imagen mostrada en el modal -->
             <img id="carrusel-img" src="" alt="Imagen del producto">
-
-            <!-- Botón imagen siguiente -->
             <button class="next">&#10095;</button>
         </div>
     </div>
