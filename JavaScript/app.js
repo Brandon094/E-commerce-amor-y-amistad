@@ -6,33 +6,80 @@
 let productos = [];
 
 // Número de WhatsApp (⚠️ CAMBIAR por el número real)
-// Formato correcto: código país + número (sin +, espacios o símbolos)
 const numeroWhatsApp = "573209538728";
 
+// ========================================
+// FUNCIONES GOOGLE ANALYTICS (EVENTOS)
+// ========================================
+
+/**
+ * Registrar clic en un producto (cuando alguien lo abre en el carrusel)
+ * @param {Object} producto - Datos del producto
+ */
+function registrarClickProducto(producto) {
+    if (typeof gtag !== "undefined") {
+        gtag("event", "select_item", {
+            items: [{
+                item_id: producto.id,
+                item_name: producto.nombre,
+                price: producto.precio,
+                item_category: producto.categoria
+            }]
+        });
+    }
+}
+
+/**
+ * Registrar clic en WhatsApp
+ * @param {String} numero - Número de WhatsApp
+ */
+function registrarClickWhatsApp(numero) {
+    if (typeof gtag !== "undefined") {
+        gtag("event", "click_whatsapp", {
+            event_category: "engagement",
+            event_label: numero,
+            value: 1
+        });
+    }
+}
+
+/**
+ * Registrar intención de compra (cuando alguien hace clic en "Pedir por WhatsApp")
+ * @param {Object} producto - Datos del producto
+ * @param {String} numero - Número de WhatsApp usado
+ */
+function registrarCompra(producto, numero) {
+    if (typeof gtag !== "undefined") {
+        gtag("event", "purchase", {
+            transaction_id: Date.now(),   // ID único para GA
+            affiliation: "E-commerce Amor y Amistad",
+            value: producto.precio,
+            currency: "COP",
+            items: [{
+                item_id: producto.id,
+                item_name: producto.nombre,
+                price: producto.precio,
+                item_category: producto.categoria
+            }],
+            contact_number: numero // campo extra (no estándar, pero útil)
+        });
+    }
+}
 
 // ========================================
 // FUNCIONES PARA CARGAR DATOS
 // ========================================
 
-/**
- * Cargar productos desde el archivo productos.json
- * Muestra un mensaje de error si no se puede cargar el archivo.
- */
 async function cargarProductos() {
     try {
         const response = await fetch('./DB/productos.json');
         if (!response.ok) throw new Error('Error al cargar productos');
 
-        // Guardamos los productos en la variable global
         productos = await response.json();
-
-        // Pintamos los productos en la página
         mostrarProductos();
 
-        // Esperar que todas las imágenes estén cargadas antes de mostrar
         await esperarImagenesCargadas();
 
-        // Ocultar loader y mostrar productos ya cargados
         document.getElementById("loader").style.display = "none";
         document.getElementById("products-container").style.display = "grid";
 
@@ -46,15 +93,10 @@ async function cargarProductos() {
     }
 }
 
-
 // ========================================
 // FUNCIONES DE VISUALIZACIÓN
 // ========================================
 
-/**
- * Renderiza los productos en el contenedor principal
- * @param {Array} productosAMostrar - Lista de productos a mostrar (por defecto todos).
- */
 function mostrarProductos(productosAMostrar = productos) {
     const container = document.getElementById('products-container');
     container.innerHTML = '';
@@ -63,7 +105,6 @@ function mostrarProductos(productosAMostrar = productos) {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
 
-        // Menú de accesorios + campo para mensaje personalizado
         let accesoriosHTML = `
             <div class="product-accessories">
                 <label>Accesorios:</label>
@@ -75,7 +116,6 @@ function mostrarProductos(productosAMostrar = productos) {
             </div>
         `;
 
-        // Tarjeta del producto
         productCard.innerHTML = `
             <div class="product-image" onclick="abrirCarrusel(${producto.id})" style="cursor: pointer;">
                 <img src="${producto.imagen}" alt="${producto.nombre}">
@@ -101,27 +141,19 @@ function mostrarProductos(productosAMostrar = productos) {
     });
 }
 
-
 // ========================================
 // FUNCIONES DE WHATSAPP
 // ========================================
 
-/**
- * Arma el mensaje de WhatsApp con datos del producto seleccionado
- * y abre la conversación en una nueva pestaña.
- * @param {Number} productoId - ID del producto.
- */
 function enviarWhatsApp(productoId) {
     const producto = productos.find(p => p.id === productoId);
     const accesorio = document.getElementById(`accesorio-${productoId}`).value;
     const mensajePersonalizado = document.getElementById(`mensaje-${productoId}`).value.trim();
 
-    // Opciones adicionales seleccionadas
     let extras = "🎀 Incluye moño decorativo";
     if (accesorio) extras += ` + ${accesorio}`;
     if (mensajePersonalizado) extras += ` + Mensaje: "${mensajePersonalizado}"`;
 
-    // Texto del mensaje
     const mensaje = `¡Hola! 😊 Me interesa el siguiente producto de su catálogo:
 
 📦 *${producto.nombre}*
@@ -136,24 +168,22 @@ ${producto.descripcion}
 
 ¡Gracias! 💕`;
 
-    // Abrir WhatsApp
     const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, '_blank');
-}
 
+    // 🔹 Eventos GA4
+    registrarClickWhatsApp(numeroWhatsApp);
+    registrarCompra(producto, numeroWhatsApp);
+}
 
 // ========================================
 // FUNCIONES DE GALERÍA / CARRUSEL
 // ========================================
 
-// Variables para manejar la galería
 let galeria = [];
 let imagenActual = 0;
 let imagenesProducto = [];
 
-/**
- * Cargar datos de la galería desde galeria.json
- */
 async function cargarGaleria() {
     try {
         const response = await fetch('./DB/galeria.json');
@@ -163,23 +193,17 @@ async function cargarGaleria() {
     }
 }
 
-/**
- * Abre el modal de imágenes. Si el producto tiene varias imágenes se activa el carrusel,
- * si solo tiene una, se muestra esa única imagen.
- */
 function abrirCarrusel(productoId) {
     const galeriaProducto = galeria.find(g => g.id === productoId);
+    const producto = productos.find(p => p.id === productoId);
 
     if (galeriaProducto && galeriaProducto.imagenes.length > 1) {
-        // Caso 1: varias imágenes
         imagenesProducto = galeriaProducto.imagenes;
         imagenActual = 0;
         document.getElementById("carrusel-img").src = imagenesProducto[imagenActual];
         document.querySelector(".prev").style.display = "block";
         document.querySelector(".next").style.display = "block";
     } else {
-        // Caso 2: una sola imagen
-        const producto = productos.find(p => p.id === productoId);
         imagenesProducto = [producto.imagen];
         imagenActual = 0;
         document.getElementById("carrusel-img").src = producto.imagen;
@@ -187,20 +211,17 @@ function abrirCarrusel(productoId) {
         document.querySelector(".next").style.display = "none";
     }
 
-    // Mostrar modal
+    // 🔹 Evento GA4: clic en producto
+    registrarClickProducto(producto);
+
     document.getElementById("modal-carrusel").style.display = "flex";
 }
 
-/**
- * Cambiar la imagen en el carrusel
- * @param {Number} direccion - 1 para siguiente, -1 para anterior
- */
 function cambiarImagen(direccion) {
     imagenActual = (imagenActual + direccion + imagenesProducto.length) % imagenesProducto.length;
     document.getElementById("carrusel-img").src = imagenesProducto[imagenActual];
 }
 
-// Eventos para cerrar el carrusel y navegar
 document.querySelector(".cerrar").addEventListener("click", () => {
     document.getElementById("modal-carrusel").style.display = "none";
 });
@@ -212,15 +233,10 @@ window.addEventListener("click", (e) => {
     }
 });
 
-
 // ========================================
-// LOADER (espera a que se carguen las imágenes)
+// LOADER
 // ========================================
 
-/**
- * Espera hasta que todas las imágenes del contenedor estén cargadas
- * antes de resolver la promesa.
- */
 function esperarImagenesCargadas() {
     return new Promise((resolve) => {
         const container = document.getElementById("products-container");
@@ -229,7 +245,7 @@ function esperarImagenesCargadas() {
         let cargadas = 0;
         const total = imagenes.length;
 
-        if (total === 0) resolve(); // si no hay imágenes
+        if (total === 0) resolve();
 
         imagenes.forEach(img => {
             if (img.complete) {
@@ -249,12 +265,11 @@ function esperarImagenesCargadas() {
     });
 }
 
-
 // ========================================
 // INICIALIZACIÓN
 // ========================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    cargarGaleria();   // primero cargamos la galería
-    cargarProductos(); // luego los productos
+    cargarGaleria();
+    cargarProductos();
 });
