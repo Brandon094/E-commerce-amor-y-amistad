@@ -5,7 +5,7 @@
         "descripcion": "Hermoso ramo de 3 girasoles eternos elaborados en tela, acompañado de un moño decorativo y accesorios opcionales como mariposa, luces o coronita. Ideal para expresar amor y alegría.",
         "precio": 50000,
         "categoria": "ramos",
-        "imagen": "./img/ramo-girasoles.jpeg",
+        "imagen": "./img/ramo-girasoles.webp",
         "accesorios": ["mariposa", "luces", "coronita"]
     },
     {
@@ -14,7 +14,7 @@
         "descripcion": "Un girasol eterno con moño decorativo. Puedes personalizarlo con accesorios y un mensaje especial.",
         "precio": 25000,
         "categoria": "ramos",
-        "imagen": "./img/girasol-mensaje-moño.jpeg",
+        "imagen": "./img/girasol-mensaje-moño.webp",
         "accesorios": ["mariposa", "luces", "coronita"]
     },
     {
@@ -23,7 +23,7 @@
         "descripcion": "Un girasol eterno con moño pequeño y la opción de incluir accesorios o un mensaje personalizado.",
         "precio": 15000,
         "categoria": "ramos",
-        "imagen": "./img/girasol-mensaje-moño-pequeño.jpeg",
+        "imagen": "./img/girasol-mensaje-moño-pequeño.webp",
         "accesorios": ["mariposa", "luces", "coronita"]
     },
     {
@@ -32,7 +32,7 @@
         "descripcion": "Un girasol eterno decorado con moño elegante. Puedes añadir accesorios y un mensaje especial.",
         "precio": 30000,
         "categoria": "ramos",
-        "imagen": "./img/girasol-mensaje-moño-pequeño-15.jpeg",
+        "imagen": "./img/girasol-mensaje-moño-pequeño-15.webp",
         "accesorios": ["mariposa", "luces", "coronita"]
     },
     {
@@ -41,7 +41,7 @@
         "descripcion": "Un girasol eterno adornado con moño decorativo y posibilidad de accesorios o mensaje personalizado.",
         "precio": 30000,
         "categoria": "ramos",
-        "imagen": "./img/girasol-mensaje-moño-pequeño-15.1.jpeg",
+        "imagen": "./img/girasol-mensaje-moño-pequeño-15.1.webp",
         "accesorios": ["mariposa", "luces", "coronita"]
     },
     {
@@ -50,7 +50,7 @@
         "descripcion": "Un girasol eterno con moño decorativo, al que puedes añadir accesorios y un mensaje especial.",
         "precio": 30000,
         "categoria": "ramos",
-        "imagen": "./img/girasol-mensaje-moño-pequeño-15.2.jpeg",
+        "imagen": "./img/girasol-mensaje-moño-pequeño-15.2.webp",
         "accesorios": ["mariposa", "luces", "coronita"]
     },
     {
@@ -59,16 +59,34 @@
         "descripcion": "Un girasol eterno acompañado de moño decorativo y opciones de accesorios o mensaje personalizado.",
         "precio": 30000,
         "categoria": "ramos",
-        "imagen": "./img/girasol-mensaje-moño-pequeño-15.3.jpeg",
+        "imagen": "./img/girasol-mensaje-moño-pequeño-15.3.webp",
         "accesorios": ["mariposa", "luces", "coronita"]
     },
     {
         "id": 8,
         "nombre": "Girasol eterno - estilo #7",
         "descripcion": "Un girasol eterno acompañado de moño decorativo, accesorios opcionales y posibilidad de incluir un mensaje especial.",
+        "precio": 30000,
+        "categoria": "ramos",
+        "imagen": "./img/girasol-mensaje-moño-pequeño-15.2.webp",
+        "accesorios": ["mariposa", "luces", "coronita"]
+    },    
+    {
+        "id": 9,
+        "nombre": "Girasol eterno - estilo #8",
+        "descripcion": "Hermoso girasole eterno elaborados en tela, acompañado de un moño decorativo y una mariposa.",
         "precio": 35000,
         "categoria": "ramos",
-        "imagen": "./img/girasol-mensaje-moño-pequeño-15.2.jpeg",
+        "imagen": "./img/girasol-mensaje-moño-mariposa.webp",
+        "accesorios": ["mariposa", "luces", "coronita"]
+    },
+    {
+        "id": 10,
+        "nombre": "Ramo de Girasoles eternos Grande",
+        "descripcion": "Hermoso ramo de 6 girasoles eternos elaborados en tela, acompañado de un moño decorativo y dos mariposa, luces.",
+        "precio": 110000,
+        "categoria": "ramos",
+        "imagen": "./img/ram-girasoles-luces.webp",
         "accesorios": ["mariposa", "luces", "coronita"]
     }
 ]

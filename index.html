@@ -4,34 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
+
+    <!-- ===========================
+         Favicon (icono de la pestaña)
+    ============================ -->
     <link rel="icon" type="image/x-icon" href="img/logo.jpeg">
-    <!-- vicular estilos -->
+
+    <!-- ===========================
+         Estilos principales
+    ============================ -->
     <link rel="stylesheet" href="css/style.css">
+
     <title>He - Zu - Detalles de Amor - Catálogo</title>
 </head>
 
 <body>
     <div class="container">
-        <!-- Header -->
+        <!-- ===========================
+             HEADER
+             Incluye logo, título, subtítulo y contactos
+        ============================ -->
         <div class="header">
             <!-- Logo -->
             <img src="./img/logo.jpeg" alt="Logo He-Zu" class="logo">
 
-            <!-- Título -->
+            <!-- Título con estilo especial -->
             <h1>
                 <samp>💕 He - Zu</samp> 💕 <br> ETERNAL
             </h1>
 
-            <!-- Subtítulo -->
+            <!-- Subtítulo / descripción -->
             <p>Los mejores detalles para el día de amor y amistad</p>
 
-            <!-- Contactos -->
+            <!-- Contactos con enlaces directos a WhatsApp -->
             <div class="contactos">
+                <!-- Contacto 1 -->
                 <a href="https://wa.me/573132199430" target="_blank" class="whatsapp-link">
                     <img src="img/whatsapp-icon.jpg" alt="WhatsApp" class="whatsapp-icon">
                     313 219 9430
                 </a>
+                <!-- Contacto 2 -->
                 <a href="https://wa.me/573209538728" target="_blank" class="whatsapp-link">
                     <img src="img/whatsapp-icon.jpg" alt="WhatsApp" class="whatsapp-icon">
                     320 953 8728
@@ -39,29 +51,56 @@
             </div>
         </div>
 
-
-        <!-- Navigation 
-        <div class="nav">
-            <button class="nav-btn active" onclick="showSection('todos')">Todos los Productos</button>
-           <button class="nav-btn" onclick="showSection('parejas')">Para Parejas</button>
-            <button class="nav-btn" onclick="showSection('amigos')">Para Amigos</button>
-            <button class="nav-btn" onclick="showSection('especiales')">Especiales</button>
-        </div>-->
-
-        <!-- Products Section -->
+        <!-- ===========================
+             SECCIÓN DE PRODUCTOS
+             Contiene loader y productos dinámicos
+        ============================ -->
         <div id="todos" class="section active">
-            <div class="products-grid" id="products-container">
+            <!-- Loader (pantalla de carga mientras se descargan las imágenes) -->
+            <div id="loader" class="loader">
+                <div class="spinner"></div>
+                <p>Cargando productos...</p>
+            </div>
+
+            <!-- Contenedor de productos (se rellena dinámicamente con JS) -->
+            <div id="products-container" class="products-grid" style="display:none;">
                 <!-- Los productos se cargarán aquí dinámicamente -->
             </div>
         </div>
 
-        <!-- Footer -->
+        <!-- ===========================
+             FOOTER
+             Mensaje final
+        ============================ -->
         <div class="footer">
             <p>❤️ Hechos con amor para personas especiales ❤️</p>
             <p>Contacto directo por WhatsApp</p>
         </div>
     </div>
 
+    <!-- ===========================
+         MODAL DEL CARRUSEL
+         Aparece al hacer clic en la imagen de un producto
+    ============================ -->
+    <div id="modal-carrusel" class="modal">
+        <!-- Botón cerrar -->
+        <span class="cerrar">&times;</span>
+
+        <div class="modal-content">
+            <!-- Botón imagen anterior -->
+            <button class="prev">&#10094;</button>
+
+            <!-- Imagen mostrada en el modal -->
+            <img id="carrusel-img" src="" alt="Imagen del producto">
+
+            <!-- Botón imagen siguiente -->
+            <button class="next">&#10095;</button>
+        </div>
+    </div>
+
+    <!-- ===========================
+         JAVASCRIPT PRINCIPAL
+    ============================ -->
     <script src="JavaScript/app.js"></script>
 </body>
 
