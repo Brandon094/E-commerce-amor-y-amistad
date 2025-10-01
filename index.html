@@ -7,7 +7,6 @@
     <meta name="language" content="Spanish">
     <meta name="geo.region" content="CO">
 
-
     <!-- ===========================
          SEO BÁSICO
     ============================ -->
@@ -18,7 +17,7 @@
 
     <!-- ===========================
      OPEN GRAPH (Facebook / WhatsApp)
-============================ -->
+    ============================ -->
     <meta property="og:site_name" content="He - Zu Eternal" />
     <meta property="og:locale" content="es_CO" />
     <meta property="og:title" content="🌹 HE - ZU ETERNAL 💝" />
@@ -50,41 +49,25 @@
     <!-- ===========================
          Favicon
     ============================ -->
-    <link rel="icon" type="image/x-icon" href="img/logo.jpeg">
+    <link rel="icon" type="image/x-icon" href="img/logo.webp">
 
     <!-- ===========================
          Estilos principales
     ============================ -->
     <link rel="stylesheet" href="CSS/style.css">
+    <!-- ===========================
+         Font Awesome Icons
+============================ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- ===========================
          GOOGLE ANALYTICS (GA4)
-         Este bloque permite rastrear visitas,
-         páginas vistas y comportamiento de los usuarios
-         en el sitio web.
-         
-         ⚠️ Importante:
-         - Reemplaza el ID "G-M8M2HFCM2C" si en un futuro
-           cambias o creas otra propiedad en GA4.
-         - Se recomienda ponerlo lo más arriba posible
-           en el <head>, antes de </head>.
     ============================ -->
-
-    <!-- Script principal de Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8M2HFCM2C"></script>
-
-    <!-- Configuración e inicialización de Google Analytics -->
     <script>
-        // Crea la capa de datos que usará Google Analytics
         window.dataLayer = window.dataLayer || [];
-
-        // Función para enviar datos al dataLayer
         function gtag() { dataLayer.push(arguments); }
-
-        // Inicializa el seguimiento con la fecha actual
         gtag('js', new Date());
-
-        // Configura la propiedad de Google Analytics con tu ID de medición
         gtag('config', 'G-M8M2HFCM2C');
     </script>
 
@@ -98,7 +81,7 @@
         ============================ -->
         <div class="header">
             <!-- Logo -->
-            <img src="./img/logo.jpeg" alt="Logo He-Zu" class="logo">
+            <img src="./img/logo.webp" alt="Logo He-Zu" class="logo">
 
             <!-- Título con estilo especial -->
             <h1>
@@ -111,15 +94,26 @@
             <!-- Contactos con enlaces directos a WhatsApp -->
             <div class="contactos">
                 <a href="https://wa.me/573132199430" target="_blank" class="whatsapp-link">
-                    <img src="img/whatsapp-icon.jpg" alt="WhatsApp" class="whatsapp-icon">
+                    <img src="img/whatsapp-icon.webp" alt="WhatsApp" class="whatsapp-icon">
                     313 219 9430
                 </a>
                 <a href="https://wa.me/573209538728" target="_blank" class="whatsapp-link">
-                    <img src="img/whatsapp-icon.jpg" alt="WhatsApp" class="whatsapp-icon">
+                    <img src="img/whatsapp-icon.webp" alt="WhatsApp" class="whatsapp-icon">
                     320 953 8728
                 </a>
             </div>
         </div>
+
+        <!-- ===========================
+             BARRA DE NAVEGACIÓN
+        ============================ -->
+        <nav class="nav">
+            <button class="nav-btn active" onclick="filtrarProductos('todos')">Todos los Productos</button>
+            <button class="nav-btn" onclick="filtrarProductos('ramos')">Ramos</button>
+            <button class="nav-btn" onclick="filtrarProductos('flores-individuales')">Flores Individuales</button>
+            <button class="nav-btn" onclick="filtrarProductos('ramos-lujo')">Ramos de Lujo</button>
+            <button class="nav-btn" onclick="filtrarProductos('ramos-tematicos')">Ramos Temáticos</button>
+        </nav>
 
         <!-- ===========================
              SECCIÓN DE PRODUCTOS
