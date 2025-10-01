@@ -2,15 +2,20 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* facilita el cálculo de anchos */
+    box-sizing: border-box;
+    /* facilita el cálculo de anchos */
 }
 
 /* Estilos generales del body */
 body {
-    font-family: 'Arial', sans-serif; /* tipografía base */
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%); /* degradado */
-    min-height: 100vh; /* ocupa todo el alto de la pantalla */
-    color: #333; /* color base del texto */
+    font-family: 'Arial', sans-serif;
+    /* tipografía base */
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    /* degradado */
+    min-height: 100vh;
+    /* ocupa todo el alto de la pantalla */
+    color: #333;
+    /* color base del texto */
 }
 
 /* Contenedor principal centrado */
@@ -24,10 +29,12 @@ body {
 .header {
     text-align: center;
     padding: 40px 0;
-    background: rgba(255, 255, 255, 0.9); /* fondo semitransparente */
+    background: rgba(255, 255, 255, 0.9);
+    /* fondo semitransparente */
     margin-bottom: 30px;
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* sombra elegante */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    /* sombra elegante */
 }
 
 .header h1 {
@@ -57,12 +64,14 @@ body {
     display: flex;
     gap: 15px;
     justify-content: center;
-    flex-wrap: wrap; /* se acomoda en pantallas pequeñas */
+    flex-wrap: wrap;
+    /* se acomoda en pantallas pequeñas */
 }
 
 .whatsapp-link {
     text-decoration: none;
-    color: #25D366; /* verde oficial de WhatsApp */
+    color: #25D366;
+    /* verde oficial de WhatsApp */
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -72,7 +81,8 @@ body {
 
 .whatsapp-link:hover {
     transform: scale(1.05);
-    color: #128C7E; /* verde más oscuro */
+    color: #128C7E;
+    /* verde más oscuro */
 }
 
 .whatsapp-icon {
@@ -107,13 +117,15 @@ body {
 }
 
 .nav-btn.active {
-    background: linear-gradient(135deg, #ad1457, #c2185b); /* cuando está activa */
+    background: linear-gradient(135deg, #ad1457, #c2185b);
+    /* cuando está activa */
 }
 
 /* ======================= GRID DE PRODUCTOS ======================= */
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* adaptable */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* adaptable */
     gap: 30px;
     margin-bottom: 40px;
 }
@@ -177,6 +189,27 @@ body {
     margin-bottom: 20px;
 }
 
+/* ======================= MENSAJE SIN PRODUCTOS ======================= */
+.no-products {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+.no-products p {
+    color: #d63384;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.no-products p:last-child {
+    color: #6c757d;
+    font-size: 1rem;
+}
+
 /* ======================= ACCESORIOS Y MENSAJES ======================= */
 .product-accessories {
     margin-bottom: 15px;
@@ -231,7 +264,7 @@ body {
     box-shadow: 0 0 8px rgba(214, 51, 132, 0.6);
 }
 
-/* Botón para WhatsApp */
+/* Estilos para el botón de WhatsApp */
 .whatsapp-btn {
     background: linear-gradient(135deg, #25d366, #128c7e);
     color: white;
@@ -246,16 +279,19 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
+    font-weight: bold;
 }
 
 .whatsapp-btn:hover {
     background: linear-gradient(135deg, #128c7e, #075e54);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
 }
 
-.whatsapp-icon {
-    width: 20px;
-    height: 20px;
+/* Icono de Font Awesome */
+.whatsapp-btn .whatsapp-icon {
+    font-size: 1.2rem;
+    color: white;
 }
 
 /* ======================= SECCIONES ======================= */
@@ -264,7 +300,8 @@ body {
 }
 
 .section.active {
-    display: block; /* solo la activa se muestra */
+    display: block;
+    /* solo la activa se muestra */
 }
 
 /* ======================= FOOTER ======================= */
@@ -302,19 +339,22 @@ body {
     display: none;
     position: fixed;
     z-index: 1000;
-    inset: 0; /* top, right, bottom, left: 0 */
+    inset: 0;
+    /* top, right, bottom, left: 0 */
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
-    padding: 20px; /* evita que toque los bordes */
+    padding: 20px;
+    /* evita que toque los bordes */
     box-sizing: border-box;
 }
 
 .modal-content {
     position: relative;
-    max-width: 600px; /* ancho máximo */
+    max-width: 600px;
+    /* ancho máximo */
     width: 100%;
     max-height: 90vh;
     display: flex;
@@ -405,16 +445,23 @@ body {
 /* Spinner circular */
 .spinner {
     border: 6px solid rgba(0, 0, 0, 0.1);
-    border-top: 6px solid #d63384; /* color principal */
+    border-top: 6px solid #d63384;
+    /* color principal */
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    animation: spin 1s linear infinite; /* animación infinita */
+    animation: spin 1s linear infinite;
+    /* animación infinita */
     margin-bottom: 15px;
 }
 
 /* Animación de giro */
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
