@@ -97,6 +97,9 @@ async function cargarProductos() {
 // FUNCIONES DE VISUALIZACIÓN
 // ========================================
 
+// FUNCIONES DE VISUALIZACIÓN
+// ========================================
+
 function mostrarProductos(productosAMostrar = productos) {
     const container = document.getElementById('products-container');
     container.innerHTML = '';
@@ -105,16 +108,27 @@ function mostrarProductos(productosAMostrar = productos) {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
 
-        let accesoriosHTML = `
-            <div class="product-accessories">
-                <label>Accesorios:</label>
-                <select id="accesorio-${producto.id}">
-                    <option value="">-- Seleccionar --</option>
-                    ${producto.accesorios.map(acc => `<option value="${acc}">${acc}</option>`).join('')}
-                </select>
-                <input type="text" id="mensaje-${producto.id}" placeholder="Escribe un mensaje personalizado (opcional)" style="margin-top:5px;">
-            </div>
-        `;
+        // ✅ VERIFICAR SI TIENE ACCESORIOS
+        let accesoriosHTML = '';
+        if (producto.accesorios && producto.accesorios.length > 0) {
+            accesoriosHTML = `
+                <div class="product-accessories">
+                    <label>Accesorios:</label>
+                    <select id="accesorio-${producto.id}">
+                        <option value="">-- Seleccionar --</option>
+                        ${producto.accesorios.map(acc => `<option value="${acc}">${acc}</option>`).join('')}
+                    </select>
+                    <input type="text" id="mensaje-${producto.id}" placeholder="Escribe un mensaje personalizado (opcional)" style="margin-top:5px;">
+                </div>
+            `;
+        } else {
+            // ✅ MOSTRAR SOLO EL INPUT DE MENSAJE SI NO HAY ACCESORIOS
+            accesoriosHTML = `
+                <div class="product-accessories">
+                    <input type="text" id="mensaje-${producto.id}" placeholder="Escribe un mensaje personalizado (opcional)" style="margin-top:5px;">
+                </div>
+            `;
+        }
 
         productCard.innerHTML = `
             <div class="product-image" onclick="abrirCarrusel(${producto.id})" style="cursor: pointer;">
@@ -127,11 +141,8 @@ function mostrarProductos(productosAMostrar = productos) {
                 ${accesoriosHTML}
                 <div class="product-price">$${producto.precio.toLocaleString()}</div>
 
-                <!-- Botón de WhatsApp -->
                 <button class="whatsapp-btn" onclick="enviarWhatsApp(${producto.id})">
-                    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967..."/>
-                    </svg>
+                    <i class="fab fa-whatsapp whatsapp-icon"></i>
                     Pedir por WhatsApp
                 </button>
             </div>
@@ -147,7 +158,14 @@ function mostrarProductos(productosAMostrar = productos) {
 
 function enviarWhatsApp(productoId) {
     const producto = productos.find(p => p.id === productoId);
-    const accesorio = document.getElementById(`accesorio-${productoId}`).value;
+
+    // ✅ VERIFICAR SI EXISTE EL SELECTOR DE ACCESORIOS
+    const selectorAccesorio = document.getElementById(`accesorio-${productoId}`);
+    let accesorio = "";
+    if (selectorAccesorio) {
+        accesorio = selectorAccesorio.value;
+    }
+
     const mensajePersonalizado = document.getElementById(`mensaje-${productoId}`).value.trim();
 
     let extras = "🎀 Incluye moño decorativo";
@@ -264,6 +282,48 @@ function esperarImagenesCargadas() {
         });
     });
 }
+// ========================================
+// FUNCIONES DE FILTRADO Y NAVEGACIÓN
+// ========================================
+
+function filtrarProductos(categoria) {
+    // Actualizar botones activos
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+
+    let productosFiltrados;
+
+    if (categoria === 'todos') {
+        productosFiltrados = productos;
+    } else {
+        productosFiltrados = productos.filter(producto => producto.categoria === categoria);
+    }
+
+    // Mostrar productos filtrados
+    mostrarProductos(productosFiltrados);
+
+    // Mostrar mensaje si no hay productos
+    const container = document.getElementById('products-container');
+    if (productosFiltrados.length === 0) {
+        container.innerHTML = `
+            <div class="no-products">
+                <p>No hay productos en esta categoría por el momento.</p>
+                <p>¡Pronto tendremos novedades!</p>
+            </div>
+        `;
+    }
+
+    // 🔹 Evento GA4: filtro aplicado
+    if (typeof gtag !== "undefined") {
+        gtag("event", "filter_products", {
+            event_category: "engagement",
+            event_label: categoria,
+            value: productosFiltrados.length
+        });
+    }
+}
 
 // ========================================
 // INICIALIZACIÓN
@@ -272,4 +332,7 @@ function esperarImagenesCargadas() {
 document.addEventListener('DOMContentLoaded', () => {
     cargarGaleria();
     cargarProductos();
+
+    // Asegurar que el botón "Todos" esté activo al inicio
+    document.querySelector('.nav-btn').classList.add('active');
 });
